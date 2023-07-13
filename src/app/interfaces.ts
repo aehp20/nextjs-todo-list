@@ -13,4 +13,5 @@ export interface TodoContextType {
   todos: Todo[]
   save: (todo: TodoForm) => void
   update: (todo: Todo) => void
+  remove: (id: string) => void
 }

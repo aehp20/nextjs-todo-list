@@ -56,7 +56,19 @@ const TodoProvider = ({ children }: { children: ReactNode }) => {
     [todos, setTodos]
   )
 
-  const value = useMemo(() => ({ todos, save, update }), [todos, save, update])
+  const remove = useCallback(
+    (id: string) => {
+      const removedTodos = todos.filter((item) => item.id !== id)
+
+      setTodos(removedTodos)
+    },
+    [todos, setTodos]
+  )
+
+  const value = useMemo(
+    () => ({ todos, save, update, remove }),
+    [todos, save, update, remove]
+  )
 
   return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>
 }
