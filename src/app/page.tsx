@@ -1,12 +1,13 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import List from "./components/List"
+import List from './components/List'
 
 export default function Home() {
   return (
     <main>
       <div>
-        <div>TODO(s)</div><Link href="/add">Add</Link>
+        <div>TODO(s)</div>
+        <Link href="/add">Add</Link>
       </div>
       <List />
     </main>

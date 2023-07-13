@@ -21,5 +21,16 @@
     "react-hook-form": "^7.45.1",
     "typescript": "5.1.6",
     "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^5.0.0-canary-7118f5dd7-20230705",
+    "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
+    "prettier": "^3.0.0"
   }
 }

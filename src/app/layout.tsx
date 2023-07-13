@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 
-import TodoProvider from "./context/context"
+import TodoProvider from './context/context'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,9 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-      <TodoProvider>
-        {children}
-      </TodoProvider>
+        <TodoProvider>{children}</TodoProvider>
       </body>
     </html>
   )

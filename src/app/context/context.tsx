@@ -1,54 +1,66 @@
 'use client'
 
-import { createContext, useState, useMemo, ReactNode, useContext } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import {
+  createContext,
+  useState,
+  useMemo,
+  ReactNode,
+  useContext,
+  useCallback,
+} from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
-import type { Todo, TodoForm, TodoContextType } from "../interfaces";
+import type { Todo, TodoForm, TodoContextType } from '../interfaces'
 
-const TodoContext = createContext<TodoContextType | null>(null);
+const TodoContext = createContext<TodoContextType | null>(null)
 
-const TodoProvider = ({ children }: {children: ReactNode}) => {
-  const [todos, setTodos] = useState<Todo[]>([{
-    id: "1",
-    title: 'todo 1',
-    description: 'description 1'
-  }, {
-    id: "2",
-    title: 'todo 2',
-    description: 'description 2'
-  }]);
+const TodoProvider = ({ children }: { children: ReactNode }) => {
+  const [todos, setTodos] = useState<Todo[]>([
+    {
+      id: '1',
+      title: 'todo 1',
+      description: 'description 1',
+    },
+    {
+      id: '2',
+      title: 'todo 2',
+      description: 'description 2',
+    },
+  ])
 
-  const save = (todo: TodoForm) => {
-    const newTodo = {
-      id: uuidv4(),
-      title: todo.title,
-      description: todo.description
-    }
-
-    setTodos([...todos, newTodo]);
-  }
-
-  const update = (todo: Todo) => {
-    const updatedTodos = todos.map(item=>{
-      if(item.id === todo.id) {
-        return {...item, ...todo};
+  const save = useCallback(
+    (todo: TodoForm) => {
+      const newTodo = {
+        id: uuidv4(),
+        title: todo.title,
+        description: todo.description,
       }
 
-      return item;
-    });
+      setTodos([...todos, newTodo])
+    },
+    [todos, setTodos]
+  )
 
-    setTodos(updatedTodos);
-  }
+  const update = useCallback(
+    (todo: Todo) => {
+      const updatedTodos = todos.map((item) => {
+        if (item.id === todo.id) {
+          return { ...item, ...todo }
+        }
 
-  const value = useMemo(()=>({todos, save, update}), [todos]);
+        return item
+      })
 
-  return (
-    <TodoContext.Provider value={value}>
-    {children}
-    </TodoContext.Provider>
-  );
-};
+      setTodos(updatedTodos)
+    },
+    [todos, setTodos]
+  )
 
-export default TodoProvider;
+  const value = useMemo(() => ({ todos, save, update }), [todos, save, update])
 
-export const useTodoContext = () => useContext(TodoContext);
+  return <TodoContext.Provider value={value}>{children}</TodoContext.Provider>
+}
+
+export default TodoProvider
+
+export const useTodoContext = () => useContext(TodoContext)
