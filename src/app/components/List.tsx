@@ -3,18 +3,10 @@
 import { useCallback } from 'react'
 import Link from 'next/link'
 
-import { useTodoContext } from '../context/context'
-import type { TodoContextType } from '../interfaces'
+import type { Todo } from '../interfaces'
 
-const List = () => {
-  const { todos, remove } = useTodoContext() as TodoContextType
-
-  const handleRemove = useCallback(
-    (id: string) => {
-      remove(id)
-    },
-    [remove]
-  )
+const List = ({ todos }: { todos: Todo[] }) => {
+  const handleRemove = useCallback((id: string) => {}, [])
 
   return todos.length > 0 ? (
     <div>
